@@ -1,0 +1,34 @@
+<html>
+<head>
+
+</head>
+<body>
+
+ok
+
+</body>
+
+<script src="node_modules/cross-storage/dist/client.js"></script>
+<script src="prettyprint.js"></script>
+<script>
+
+    var storage = new CrossStorageClient('https://wrioos.com/Plus-WRIO-App/widget/storageHub.htm', {
+        promise: Promise
+    });
+
+   function dumpVar(variable) {
+       storage.onConnect().then(function() {
+           return storage.get(variable);
+       }).then(function(plus) {
+           var p = prettyPrint(plus);
+           document.body.insertBefore( p, document.body.firstChild );
+       });
+   }
+
+    dumpVar('plus');
+    dumpVar('plusActive');
+    dumpVar('savedUsers');
+
+</script>
+
+</html>
