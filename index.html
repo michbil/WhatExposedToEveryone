@@ -5,8 +5,9 @@
 <body>
 
 <iframe src="https://login.wrioos.com/buttons/twitter"></iframe>
-
-
+<h1 >Profiles</h1>
+<h1 id="profiles">History</h1>
+<div id="history"></div>
 </body>
 
 
@@ -14,32 +15,34 @@
 <script src="prettyprint.js"></script>
 <script>
 
+
+
     var storage = new CrossStorageClient('https://wrioos.com/Plus-WRIO-App/widget/storageHub.htm', {
         promise: Promise
     });
 
-    function pp(data) {
+    function pp(data,section) {
         var p = prettyPrint(data);
-        document.body.insertBefore( p, document.body.firstChild );
+        document.body.insertBefore( p, document.getElementById(section));
     }
 
-   function dumpVar(variable) {
+   function dumpVar(variable,section) {
        storage.onConnect().then(function() {
            return storage.get(variable);
        }).then(function(data) {
-            pp(data)
+            pp(data,section)
        });
    }
 
-    dumpVar('plus');
-    dumpVar('plusActive');
-    dumpVar('savedUsers');
+  //  dumpVar('plus','history');
+   // dumpVar('plusActive','history');
+   // dumpVar('savedUsers','history');
 
     var listen = true;
 
     window.addEventListener('message',function (m) {
         if (listen) {
-            pp(JSON.parse(m.data));
+            pp(JSON.parse(m.data),'profiles');
             listen = false;
         }
 
