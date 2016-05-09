@@ -4,9 +4,11 @@
 </head>
 <body>
 
-ok
+<iframe src="https://login.wrioos.com/buttons/twitter"></iframe>
+
 
 </body>
+
 
 <script src="node_modules/cross-storage/dist/client.js"></script>
 <script src="prettyprint.js"></script>
@@ -16,18 +18,32 @@ ok
         promise: Promise
     });
 
+    function pp(data) {
+        var p = prettyPrint(data);
+        document.body.insertBefore( p, document.body.firstChild );
+    }
+
    function dumpVar(variable) {
        storage.onConnect().then(function() {
            return storage.get(variable);
-       }).then(function(plus) {
-           var p = prettyPrint(plus);
-           document.body.insertBefore( p, document.body.firstChild );
+       }).then(function(data) {
+            pp(data)
        });
    }
 
     dumpVar('plus');
     dumpVar('plusActive');
     dumpVar('savedUsers');
+
+    var listen = true;
+
+    window.addEventListener('message',function (m) {
+        if (listen) {
+            pp(JSON.parse(m.data));
+            listen = false;
+        }
+
+    });
 
 </script>
 
