@@ -5,9 +5,16 @@
 <body>
 
 <iframe src="https://login.wrioos.com/buttons/twitter"></iframe>
-<h1 >Profiles</h1>
-<h1 id="profiles">History</h1>
-<div id="history"></div>
+<div>
+    <h1 >Profiles</h1>
+    <div id="profiles"></div>
+</div>
+<div>
+    <h1 >History</h1>
+    <div id="history"></div>
+</div>
+
+
 </body>
 
 
@@ -23,13 +30,14 @@
 
     function pp(data,section) {
         var p = prettyPrint(data);
-        document.body.insertBefore( p, document.getElementById(section));
+        document.getElementById(section).appendChild(p);
     }
 
    function dumpVar(variable,section) {
        storage.onConnect().then(function() {
            return storage.get(variable);
        }).then(function(data) {
+
             pp(data,section)
        });
    }
@@ -41,7 +49,7 @@
     var listen = true;
 
     window.addEventListener('message',function (m) {
-        if (listen) {
+        if (listen && m.origin === 'https://login.wrioos.com') {
             pp(JSON.parse(m.data),'profiles');
             listen = false;
         }
