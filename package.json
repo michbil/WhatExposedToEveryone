@@ -1,0 +1,22 @@
+{
+  "name": "whats",
+  "version": "1.0.0",
+  "description": "What resources on webrunes are for every party",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michbil/WhatExposedToEveryone.git"
+  },
+  "author": "Michael Bilenko <denso.ffff@gmail.com> (http://github.com/michbil)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michbil/WhatExposedToEveryone/issues"
+  },
+  "homepage": "https://github.com/michbil/WhatExposedToEveryone#readme",
+  "dependencies": {
+    "cross-storage": "^0.8.1"
+  }
+}
